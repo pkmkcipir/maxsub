@@ -1,0 +1,23 @@
+# MaxSubtitle - Python dependencies
+# Install dengan: pip install -r requirements.txt
+
+# --- GUI ---
+customtkinter>=5.2.2
+
+# --- Transkripsi ucapan-ke-teks (AI) ---
+faster-whisper>=1.0.3
+
+# --- Terjemahan otomatis ---
+deep-translator>=1.11.4
+
+# --- Video & gambar ---
+opencv-python-headless>=4.9.0
+Pillow>=10.2.0
+
+# --- Audio (waveform + playback preview) ---
+soundfile>=0.12.1
+sounddevice>=0.4.6
+numpy>=1.26.0
+
+# --- Packaging jadi .exe ---
+pyinstaller>=6.4.0
