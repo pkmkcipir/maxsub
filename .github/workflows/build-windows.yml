@@ -1,0 +1,60 @@
+name: Build MaxSubtitle Windows Installer
+
+# Cara pakai:
+#   1. Push folder proyek ini ke repo GitHub (public atau private, gratis untuk keduanya
+#      selama masih dalam batas menit gratis GitHub Actions).
+#   2. Buka tab "Actions" di repo, pilih workflow ini, klik "Run workflow".
+#      (atau otomatis jalan tiap kali push tag versi seperti v2.0.0)
+#   3. Tunggu selesai (~10-15 menit), lalu unduh hasilnya di bagian "Artifacts".
+#
+# Ini membangun MaxSubtitle.exe dan installer-nya di komputer Windows sungguhan
+# milik GitHub - jadi hasilnya adalah exe Windows asli, bukan hasil cross-compile.
+
+on:
+  workflow_dispatch: {}
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependency Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Jalankan self-test
+        run: python main.py --selftest
+
+      - name: Build exe dengan PyInstaller
+        run: pyinstaller build.spec --noconfirm
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y --no-progress
+
+      - name: Build installer Windows
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+        shell: pwsh
+
+      - name: Upload MaxSubtitle.exe (folder aplikasi)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaxSubtitle-app-portable
+          path: dist/MaxSubtitle/
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaxSubtitle-Setup-installer
+          path: installer_output/*.exe
