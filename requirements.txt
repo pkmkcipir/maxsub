@@ -1,0 +1,32 @@
+# MaxSubtitle - Python dependencies
+# Install dengan: pip install -r requirements.txt
+
+# --- GUI ---
+customtkinter>=5.2.2
+
+# --- Transkripsi ucapan-ke-teks (AI) ---
+faster-whisper>=1.0.3
+
+# --- Terjemahan otomatis ---
+deep-translator>=1.11.4
+
+# --- Video & gambar ---
+opencv-python-headless>=4.9.0
+Pillow>=10.2.0
+
+# --- Audio (waveform + playback preview) ---
+soundfile>=0.12.1
+sounddevice>=0.4.6
+numpy>=1.26.0
+
+# --- Packaging jadi .exe ---
+pyinstaller>=6.4.0
+
+# --- GPU NVIDIA (OPSIONAL - jangan di-install kalau tidak punya GPU NVIDIA) ---
+# Tanpa ini, aplikasi otomatis & tetap berjalan normal memakai CPU.
+# Install baris di bawah HANYA kalau mau transkripsi lebih cepat lewat GPU
+# dan tidak mau install CUDA Toolkit lengkap dari NVIDIA secara terpisah.
+# Uncomment 2 baris berikut (hapus tanda #) lalu jalankan ulang
+# "pip install -r requirements.txt":
+# nvidia-cublas-cu12
+# nvidia-cudnn-cu12==9.*
