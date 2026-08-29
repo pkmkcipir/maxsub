@@ -1,0 +1,25 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Build artifacts
+build/
+dist/
+installer_output/
+*.spec.bak
+__pycache__/
+*.pyc
+*.pyo
+
+# Model cache (jangan di-commit, terlalu besar - didownload otomatis saat pertama pakai)
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Log
+*.log
